@@ -1,32 +1,41 @@
-// 🐨 you'll need to import react and createRoot from react-dom up here
 import * as React from "react";
 import {createRoot} from "react-dom/client";
-
-// 🐨 you'll also need to import the Logo component from './components/logo'
 import {Logo} from './components/logo'
+import {Dialog} from "@reach/dialog"
+import '@reach/dialog/styles.css'
 
-// 🐨 create an App component here and render the logo, the title ("Bookshelf"), a login button, and a register button.
 const App = () => {
+    const [showForm, setShowForm] = React.useState('')
+
+    const openLogin = () => setShowForm('login');
+
+    const openRegister = () => setShowForm('register');
+    
+    const closeDialog = () => setShowForm('');
+    
     return (
         <div>
             <Logo width="80" height="80"/>
             <h1>Bookshelf</h1>
             <div>
-                <button onClick={() => alert("Login")}>Login</button>
+                <button onClick={openLogin}>Login</button>
             </div>
             <div>
-                <button onClick={() => alert("Register")}>Register</button>
+                <button onClick={openRegister}>Register</button>
             </div>
+            <Dialog aria-label="Login form" isOpen={showForm === 'login'} onDismiss={closeDialog}>
+                <h1>Login</h1>
+                <button onClick={closeDialog}>Close</button>
+            </Dialog>
+            <Dialog aria-label="Register form" isOpen={showForm === 'register'} onDismiss={closeDialog}>
+                <h1>Register</h1>
+                <button onClick={closeDialog}>Close</button>
+            </Dialog>
         </div>
     )
 }
 
-// 🐨 for fun, you can add event handlers for both buttons to alert that the button was clicked
-const domNode = document.getElementById('root');
-
-// 🐨 use createRoot to render the <App /> to the root element
-// 💰 find the root element with: document.getElementById('root')
-const root = createRoot(domNode);
+const root = createRoot(document.getElementById('root'));
 
 root.render(<App />)
 export {root}
