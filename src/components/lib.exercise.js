@@ -1,5 +1,6 @@
 import styled from '@emotion/styled'
 import {Dialog as ReachDialog} from '@reach/dialog'
+import { parseIsomorphicRequest } from 'msw'
 
 // 🐨 create a button styled component here called "Button"
 // make it look nice and allow it to support a "variant" prop which can be
@@ -14,6 +15,24 @@ import {Dialog as ReachDialog} from '@reach/dialog'
 
 // 🐨 Feel free to create as many reusable styled components here as you'd like
 // 💰 in my finished version I have: Button, Input, CircleButton, Dialog, FormGroup
+const buttonVariants = {
+  primary: {
+    background: '#3f51b5',
+    color: 'white',
+  },
+  secondary: {
+    background: '#f1f2f7',
+    color: '#434449',
+  }
+}
+
+
+const Button = styled.button({
+  padding: '10px 15px',
+  border: '0',
+  lineHeight: '1',
+  borderRadius: '3px',
+}, ({variant = 'primary'}) => buttonVariants[variant])
 
 // 🎨 here are a bunch of styles you can copy/paste if you want
 // Button:
@@ -23,8 +42,6 @@ import {Dialog as ReachDialog} from '@reach/dialog'
 //   borderRadius: '3px',
 
 // Button variant="primary" (in addition to the above styles)
-//   background: '#3f51b5',
-//   color: 'white',
 
 // Button variant="secondary" (in addition to the above styles)
 //   background: '#f1f2f7',
@@ -68,4 +85,4 @@ const Dialog = styled(ReachDialog)({
   },
 })
 
-export {CircleButton, Dialog}
+export {Button, CircleButton, Dialog}
